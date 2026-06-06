@@ -85,7 +85,8 @@ codewords, paper Table 12) is in
 | Table: Cross-scheme counterfactual  | `eval_n500_gzs_shift_sdp.py`                     |
 | Table: PRC sign-level BA            | `eval_prc_sign_ba_shift_high.py`                 |
 | Table: Held-out calibration         | `eval_n500_heldout.py`                           |
-| Table: Sigma table                  | `eval_n500_sigma_table.py`                       |
+| Table: Stratified per-magnitude $q_j$ | `eval_n500_sigma_table.py`                     |
+| Figure: Sheppard closed-form validation | `eval_sign_agreement_attacks.py`             |
 | Table: SD 1.5 cross-backbone        | `eval_n500_sd15.py`                              |
 | Table: Unseen + combo attacks       | `eval_n500_unseen_combo_sdp.py`                  |
 | Figure: Attack strength sweep       | `eval_n500_strength_sweep_sdp.py`                |
