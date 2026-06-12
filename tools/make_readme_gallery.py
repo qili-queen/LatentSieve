@@ -36,6 +36,10 @@ CONDITIONS = {
         "title": "After UnMarker-S2 removal attack",
         "suffix": "attacked_s2",
     },
+    "shift_attacked_lambda05_watermarks": {
+        "title": "After SHIFT trajectory deflection at lambda=0.5",
+        "suffix": "source:shift_lambda_0.5",
+    },
     "shift_attacked_watermarks": {
         "title": "After SHIFT trajectory deflection at lambda=0.7",
         "suffix": "source:shift_lambda_0.7",

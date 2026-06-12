@@ -54,9 +54,13 @@ Each row below is one SDP prompt/seed pair. Columns compare the paired unwaterma
 
 ![UnMarker-S2-attacked watermarked outputs](assets/gallery/unmarker_s2_attacked_watermarks.png)
 
-**SHIFT trajectory deflection**
+**SHIFT trajectory deflection ($\lambda = 0.5$)**
 
-![SHIFT-attacked watermarked outputs](assets/gallery/shift_attacked_watermarks.png)
+![SHIFT-attacked watermarked outputs at lambda 0.5](assets/gallery/shift_attacked_lambda05_watermarks.png)
+
+**SHIFT trajectory deflection ($\lambda = 0.7$)**
+
+![SHIFT-attacked watermarked outputs at lambda 0.7](assets/gallery/shift_attacked_watermarks.png)
 
 The checked-in gallery images were built from cached evaluation outputs. The helper script `tools/make_readme_gallery.py` is for release preparation and expects those cached outputs to be present locally.
 
