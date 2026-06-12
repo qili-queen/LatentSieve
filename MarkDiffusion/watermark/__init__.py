@@ -1,4 +1,4 @@
-# Copyright 2025 THU-BPM MarkDiffusion.
+# Copyright 2025 MIRAGE anonymous release.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ This package provides watermarking algorithms for diffusion models including:
 """
 
 __version__ = "0.1.6.post1"
-__author__ = "THU-BPM MarkDiffusion Team"
 __license__ = "Apache-2.0"
 
 from .base import BaseWatermark, BaseConfig

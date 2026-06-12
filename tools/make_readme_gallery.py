@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = RELEASE_ROOT.parent
-SOURCE_ROOT = WORKSPACE_ROOT / "MarkDiffusion" / "qi_eval_n500_sdp"
+SOURCE_ROOT = WORKSPACE_ROOT / "MarkDiffusion" / "eval_n500_sdp"
 OUT_DIR = RELEASE_ROOT / "assets" / "gallery"
 GALLERY_SOURCE = OUT_DIR / "source"
 PAIRED_ORIGINAL_ROOT = OUT_DIR / "source" / "original"

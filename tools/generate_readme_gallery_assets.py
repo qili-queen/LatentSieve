@@ -17,15 +17,14 @@ from diffusers import DDIMScheduler
 RELEASE_ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = RELEASE_ROOT.parent
 MARKDIFF_ROOT = WORKSPACE_ROOT / "MarkDiffusion"
-EVAL_ROOT = MARKDIFF_ROOT / "qi_eval_n500_sdp"
+EVAL_ROOT = MARKDIFF_ROOT / "eval_n500_sdp"
 GALLERY_SOURCE = RELEASE_ROOT / "assets" / "gallery" / "source"
 
 sys.path.insert(0, str(MARKDIFF_ROOT))
 
-from qi_eval_n500_shift_sdp import encode_prompt, shift_attack  # noqa: E402
-from qi_gen_n500_sdp import reseed  # noqa: E402
-from qi_runtime_utils import build_cached_pipe, configure_qi_runtime, resolve_qi_device  # noqa: E402
-from qi_sdp_n500_config import PROMPTS  # noqa: E402
+from eval_n500_shift_sdp import encode_prompt, reseed, shift_attack  # noqa: E402
+from runtime_utils import build_cached_pipe, configure_runtime, resolve_device  # noqa: E402
+from sdp_n500_config import PROMPTS  # noqa: E402
 from utils.diffusion_config import DiffusionConfig  # noqa: E402
 from watermark.auto_watermark import AutoWatermark  # noqa: E402
 
@@ -113,9 +112,9 @@ def generate_shift(pipe, device, dtype) -> None:
 
 
 def main() -> None:
-    configure_qi_runtime()
+    configure_runtime()
     os.chdir(MARKDIFF_ROOT)
-    device, dtype = resolve_qi_device(0)
+    device, dtype = resolve_device(0)
     pipe, scheduler = build_cached_pipe(MODEL, device, dtype)
     wm = build_watermark(pipe, scheduler, device, dtype)
     generate_originals(wm)
