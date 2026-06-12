@@ -40,7 +40,7 @@ Stable Diffusion 2.1-base is the default backbone; weights download from Hugging
 
 ## 3. Visual Examples
 
-Each row below is one SDP prompt/seed pair. Columns compare the unwatermarked image with MIRAGE and four baseline watermarks.
+Each row below is one SDP prompt/seed pair. Columns compare the paired unwatermarked original with MIRAGE and four baseline watermarks.
 
 **Clean watermarked outputs**
 
@@ -53,6 +53,10 @@ Each row below is one SDP prompt/seed pair. Columns compare the unwatermarked im
 **After UnMarker-S2 removal attack**
 
 ![UnMarker-S2-attacked watermarked outputs](assets/gallery/unmarker_s2_attacked_watermarks.png)
+
+**SHIFT trajectory deflection**
+
+![SHIFT-attacked watermarked outputs](assets/gallery/shift_attacked_watermarks.png)
 
 The checked-in gallery images were built from cached evaluation outputs. The helper script `tools/make_readme_gallery.py` is for release preparation and expects those cached outputs to be present locally.
 

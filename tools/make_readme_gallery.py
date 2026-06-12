@@ -13,6 +13,8 @@ RELEASE_ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = RELEASE_ROOT.parent
 SOURCE_ROOT = WORKSPACE_ROOT / "MarkDiffusion" / "qi_eval_n500_sdp"
 OUT_DIR = RELEASE_ROOT / "assets" / "gallery"
+GALLERY_SOURCE = OUT_DIR / "source"
+PAIRED_ORIGINAL_ROOT = OUT_DIR / "source" / "original"
 
 SCHEMES = ["MIRAGE", "GS", "PRC", "T2SMark", "TR"]
 COLUMNS = ["Original"] + SCHEMES
@@ -33,6 +35,10 @@ CONDITIONS = {
     "unmarker_s2_attacked_watermarks": {
         "title": "After UnMarker-S2 removal attack",
         "suffix": "attacked_s2",
+    },
+    "shift_attacked_watermarks": {
+        "title": "After SHIFT trajectory deflection at lambda=0.7",
+        "suffix": "source:shift_lambda_0.7",
     },
 }
 
@@ -57,12 +63,20 @@ def font(size: int) -> ImageFont.ImageFont:
 def image_path(column: str, idx: int, suffix: str) -> Path:
     name = f"img_{idx:04d}.png"
     if column == "Original":
-        return SOURCE_ROOT / "UNWM_sdp" / name
+        return PAIRED_ORIGINAL_ROOT / name
+    if suffix.startswith("source:"):
+        return GALLERY_SOURCE / suffix.split(":", 1)[1] / column / name
     return SOURCE_ROOT / f"{column}_{suffix}" / name
 
 
 def load_tile(path: Path) -> Image.Image:
     if not path.exists():
+        if PAIRED_ORIGINAL_ROOT in path.parents:
+            raise FileNotFoundError(
+                f"{path} is missing. Generate paired unwatermarked originals "
+                f"with the same SDP prompt/seed indices under "
+                f"{PAIRED_ORIGINAL_ROOT} before rebuilding galleries."
+            )
         raise FileNotFoundError(path)
     return Image.open(path).convert("RGB").resize((CELL, CELL), Image.LANCZOS)
 
