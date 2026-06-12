@@ -13,6 +13,8 @@ Contains the MIRAGE implementation, the four baseline schemes (Tree-Ring, Gaussi
 ```
 mirage_release/
 ├── README.md
+├── assets/gallery/              # README visual examples
+├── tools/                       # Release helper scripts
 ├── MarkDiffusion/                # MIRAGE + baselines + evaluation
 │   ├── watermark/{mirage,gs,prc,tr}/   # Embedding implementations
 │   ├── detection/{mirage,gs,prc,tr}/   # Matched decoders
@@ -36,7 +38,25 @@ pip install -r requirements.txt
 
 Stable Diffusion 2.1-base is the default backbone; weights download from Hugging Face on first use. SDXL and FLUX.1-dev are also supported but require additional disk space and longer inversion.
 
-## 3. Quick Start
+## 3. Visual Examples
+
+Each row below is one SDP prompt/seed pair. Columns compare the unwatermarked image with MIRAGE and four baseline watermarks.
+
+**Clean watermarked outputs**
+
+![Clean watermarked outputs](assets/gallery/clean_watermarks.png)
+
+**After Ctrlgen removal attack**
+
+![Ctrlgen-attacked watermarked outputs](assets/gallery/ctrlgen_attacked_watermarks.png)
+
+**After UnMarker-S2 removal attack**
+
+![UnMarker-S2-attacked watermarked outputs](assets/gallery/unmarker_s2_attacked_watermarks.png)
+
+The checked-in gallery images were built from cached evaluation outputs. The helper script `tools/make_readme_gallery.py` is for release preparation and expects those cached outputs to be present locally.
+
+## 4. Quick Start
 
 Embed a watermark and run the standard attack suite:
 
@@ -61,7 +81,7 @@ python eval_n200_adaptive_whitebox_lpips.py --gpu 0 --num-images 100 \
     --latent-budgets 5.0,20.0,50.0,100.0,200.0
 ```
 
-## 4. Mapping from Paper Results to Scripts
+## 5. Mapping from Paper Results to Scripts
 
 Table and figure numbers below match the compiled paper. Image quality (Table 3,
 FID/KID/IS) is computed with standard `torchmetrics` estimators over generated
@@ -94,13 +114,13 @@ images and has no dedicated script.
 
 T2SMark variants use `eval_n500_t2smark_*` counterparts (T2SMark requires a separate inversion pipeline with its own checkpoint).
 
-## 5. Reproducibility
+## 6. Reproducibility
 
 - All scripts seed PyTorch and NumPy via `runtime_utils.configure_runtime()`.
 - The cross-scheme SDP slice is fixed: 100 prompts × 5 seeds = 500 images, identical across schemes for paired statistical tests.
 - Raw per-image scores are logged as JSON; aggregation recomputes paper numbers from these logs.
 - Confidence intervals use the Wilson score; McNemar tests use Edwards' continuity correction.
 
-## 6. Licensing
+## 7. Licensing
 
 Apache 2.0 (`MarkDiffusion/LICENSE`, `T2SMark/LICENSE`).
