@@ -1,10 +1,10 @@
 """Stage 8: 15 unseen + combo attacks on MIRAGE × N=500.
 
 9 unseen single attacks + 6 combo attacks (matches paper Table 5).
-Uses cached eval_n500/MIRAGE_wm/ images.
+Uses cached qi_eval_n500/MIRAGE_wm/ images.
 
 Usage:
-  python eval_n500_unseen_combo.py --gpu 2
+  python qi_eval_n500_unseen_combo.py --gpu 2
 """
 
 import argparse
@@ -30,22 +30,22 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from evaluation.tools.image_editor import (
     CrSc, GaussianBlurring, GaussianNoise, JPEGCompression,
 )
-from runtime_utils import build_cached_pipe, configure_runtime, resolve_device
+from qi_runtime_utils import build_cached_pipe, configure_qi_runtime, resolve_qi_device
 from utils.diffusion_config import DiffusionConfig
 from utils.media_utils import get_random_latents
 from watermark.auto_watermark import AutoWatermark
 
-configure_runtime()
+configure_qi_runtime()
 
-MODEL = "stabilityai/stable-diffusion-2-1-base"
+MODEL = "huanzi05/stable-diffusion-2-1-base"
 STEPS = 50
 GS_SCALE = 7.5
 SIZE = 512
 
-from sdp_n500_config import PROMPTS
+from qi_sdp_n500_config import PROMPTS
 
 WM_DIR_BASE = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "eval_n500_sdp"
+    os.path.dirname(os.path.abspath(__file__)), "qi_eval_n500_sdp"
 )
 
 
@@ -162,10 +162,10 @@ def main():
     parser.add_argument("--num-prompts", type=int, default=100)
     parser.add_argument("--seeds-per-prompt", type=int, default=5)
     parser.add_argument("--output", type=str,
-                        default="eval_n500_sdp/unseen_combo_mirage.json")
+                        default="qi_eval_n500_sdp/unseen_combo_mirage.json")
     args = parser.parse_args()
 
-    device, dtype = resolve_device(args.gpu)
+    device, dtype = resolve_qi_device(args.gpu)
     pipe, scheduler = build_cached_pipe(MODEL, device, dtype)
     dc = DiffusionConfig(
         scheduler=scheduler, pipe=pipe, device=device,

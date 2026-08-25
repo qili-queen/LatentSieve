@@ -1,0 +1,61 @@
+{
+    "algorithm_name": "MIRAGE",
+    "num_blocks": 256,
+    "block_dim": 32,
+    "selection_pool_size": 512,
+    "selection_seed": 314159,
+    "selection_strategy": "topk",
+    "permutation_seed": 271828,
+    "sign_key_seed": 314159265,
+    "watermark_seed": 271828182,
+    "presence_bitacc_threshold": 0.67,
+    "presence_erasure_bits": 32,
+    "weight_min": 1.0,
+    "weight_max": 2.4,
+    "whitening_eps": 0.0001,
+    "whitening_shrinkage": 0.1,
+    "reliability_attack_names": [
+        "JPEG-75",
+        "Blur-2",
+        "Noise-15",
+        "Overlay",
+        "CropPadBlack-0.8",
+        "AdaptiveNoise"
+    ],
+    "reliability_attack_weights": {
+        "clean": 0.75,
+        "JPEG-75": 0.5,
+        "Blur-2": 1.5,
+        "Noise-15": 2.5,
+        "Overlay": 2.0,
+        "CropPadBlack-0.8": 2.0,
+        "AdaptiveNoise": 1.5
+    },
+    "reliability_aggregation": "harmonic",
+    "reliability_attack_focus": 2.0,
+    "reliability_attack_repeats": {
+        "JPEG-75": 1,
+        "Blur-2": 2,
+        "Noise-15": 3,
+        "Overlay": 2,
+        "CropPadBlack-0.8": 2,
+        "AdaptiveNoise": 2
+    },
+    "whitening_include_clean_recovered": true,
+    "whitening_include_attacked_recovered": true,
+    "fpr": 1e-09,
+    "calibration_prompts": [
+        "A beautiful sunset over the ocean with golden clouds",
+        "A cinematic mountain lake at dawn with pine trees and fog",
+        "A close-up portrait of an elderly fisherman with weathered skin",
+        "A rainy Tokyo street at night with neon reflections and umbrellas",
+        "A red vintage car parked in a wide desert under blue sky",
+        "A cozy independent bookstore interior with warm lamps and wooden shelves",
+        "A snow-covered cabin in a dense pine forest at twilight",
+        "A macro photograph of a bee on a bright sunflower",
+        "An aerial view of a coastal city at sunrise with soft haze",
+        "A futuristic laboratory with glass walls, white robots, and holograms"
+    ],
+    "cache_dir": "watermark/mirage/cache",
+    "use_per_image_nonce": true
+}

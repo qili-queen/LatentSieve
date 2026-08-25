@@ -6,7 +6,7 @@ import torch
 from diffusers import DPMSolverMultistepScheduler, StableDiffusionPipeline
 
 
-def configure_runtime() -> None:
+def configure_qi_runtime() -> None:
     os.environ.setdefault("NUMBA_CACHE_DIR", "/tmp/numba_cache")
     os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
     os.environ.pop("HF_ENDPOINT", None)
@@ -63,7 +63,7 @@ def explain_cuda_unavailable(reason: Exception | None = None) -> str:
     return " ".join(message_parts)
 
 
-def resolve_device(gpu_index: int | None) -> tuple[str, torch.dtype]:
+def resolve_qi_device(gpu_index: int | None) -> tuple[str, torch.dtype]:
     if gpu_index is None:
         return "cpu", torch.float32
 

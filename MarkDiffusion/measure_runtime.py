@@ -17,13 +17,13 @@ from statistics import mean, stdev
 import torch
 from PIL import Image
 
-from runtime_utils import build_cached_pipe, configure_runtime, resolve_device
+from qi_runtime_utils import build_cached_pipe, configure_qi_runtime, resolve_qi_device
 from utils.diffusion_config import DiffusionConfig
 from utils.media_utils import get_media_latents, get_random_latents, transform_to_model_format
 from utils.utils import set_random_seed
 from watermark.auto_watermark import AutoWatermark
 
-configure_runtime()
+configure_qi_runtime()
 
 PROMPTS = [
     "A beautiful sunset over the ocean with golden clouds",
@@ -293,7 +293,7 @@ def print_comparison_table(all_results):
 def main():
     parser = argparse.ArgumentParser(description="Measure runtime of watermarking algorithms")
     parser.add_argument("--gpu", type=int, default=None)
-    parser.add_argument("--model", default="stabilityai/stable-diffusion-2-1-base")
+    parser.add_argument("--model", default="huanzi05/stable-diffusion-2-1-base")
     parser.add_argument("--steps", type=int, default=50)
     parser.add_argument("--size", type=int, default=512)
     parser.add_argument("--num-images", type=int, default=10)
@@ -301,7 +301,7 @@ def main():
                         help="Algorithms to benchmark")
     args = parser.parse_args()
 
-    device, dtype = resolve_device(args.gpu)
+    device, dtype = resolve_qi_device(args.gpu)
     print(f"Device: {device}, dtype: {dtype}")
     print(f"Steps: {args.steps}, Size: {args.size}, Num images: {args.num_images}")
 

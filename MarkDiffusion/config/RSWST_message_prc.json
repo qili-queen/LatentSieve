@@ -1,0 +1,53 @@
+{
+    "algorithm_name": "RSWST",
+    "mode": "message_recovery",
+    "outer_code_type": "sparse_prc",
+    "message": "Hello, World!",
+    "num_blocks": 512,
+    "block_dim": 8,
+    "num_sectors": 4,
+    "selection_pool_size": 1024,
+    "selection_seed": 314159,
+    "permutation_seed": 271828,
+    "outer_code_seed": 424242,
+    "outer_bch_distance": 223,
+    "outer_sparse_t": 3,
+    "outer_test_bits_seed": 987654,
+    "num_test_bits": 40,
+    "crc_bits": 16,
+    "mask_key_seed": 123321,
+    "mask_nonce_seed": 456654,
+    "presence_bitacc_threshold": 0.65,
+    "soft_bit_erasure_budgets": [8, 16, 24, 32, 48, 64, 96, 128],
+    "soft_symbol_erasure_budgets": [4, 8, 12, 16, 24, 32, 48, 64],
+    "list_symbol_budgets": [2, 4, 6],
+    "list_symbol_topk": 2,
+    "list_beam_width": 8,
+    "sector_shrink": 0.35,
+    "score_temperature": 1.0,
+    "prototype_seed": 202503,
+    "whitening_eps": 1e-4,
+    "whitening_shrinkage": 0.1,
+    "reliability_attack_names": ["JPEG-75", "Blur-2", "Noise-15", "Overlay"],
+    "reliability_attack_weights": {
+        "clean": 2.0,
+        "JPEG-75": 1.0,
+        "Blur-2": 1.5,
+        "Noise-15": 1.5,
+        "Overlay": 1.0
+    },
+    "reliability_attack_repeats": {
+        "JPEG-75": 1,
+        "Blur-2": 1,
+        "Noise-15": 1,
+        "Overlay": 1
+    },
+    "whitening_include_clean_recovered": true,
+    "whitening_include_attacked_recovered": true,
+    "fpr": 1e-9,
+    "calibration_prompts": [
+        "A beautiful sunset over the ocean with golden clouds",
+        "A cinematic mountain lake at dawn with pine trees and fog"
+    ],
+    "cache_dir": "watermark/rswst/cache"
+}
