@@ -1,10 +1,6 @@
 # LatentSieve: Reliability-Aware Decoding for Noise-Space Diffusion Watermarks
 
-Anonymous code release for the USENIX Security 2027 submission **LatentSieve: Reliability-Aware Decoding for Noise-Space Diffusion Watermarks**.
-
-Contains the LatentSieve implementation, the four baseline schemes (Tree-Ring, Gaussian Shading, PRC, T2SMark), and the evaluation scripts that produce the experimental results in the paper.
-
-> *Submission under double-blind review. Do not contact or attempt to deanonymize the authors.*
+This repository contains the LatentSieve implementation, four watermarking baselines (Tree-Ring, Gaussian Shading, PRC, and T2SMark), and the evaluation scripts. See [Reproducibility](#5-reproducibility) for the data behind the decoder comparisons and the additional false-positive measurements.
 
 ---
 
@@ -17,8 +13,9 @@ Contains the LatentSieve implementation, the four baseline schemes (Tree-Ring, G
 ## 1. Repository Layout
 
 ```
-latentsieve_release/
+LatentSieve/
 ├── README.md
+├── artifacts/                  # Score data and analysis scripts
 ├── assets/gallery/              # README visual examples
 ├── tools/                       # Release helper scripts
 ├── MarkDiffusion/                # LatentSieve + baselines + evaluation
@@ -97,6 +94,20 @@ python eval_n200_adaptive_whitebox_lpips.py --gpu 0 --num-images 100 \
 
 
 ## 5. Reproducibility
+
+The [score archive](artifacts/decoder_score_artifact.zip) contains paired scores for uniform scoring, hard erasure, and soft block weighting, along with per-image block agreement counts, calibration settings, and the analysis scripts. It also includes verification scores on unmarked images for the fixed-cutoff distortion panels on SD 2.1, SD 1.5, and FLUX.1-dev. The SDXL transfer figures come from a separate archived evaluation.
+
+Extract the archive from the repository root and follow its `README.md` for the threshold and bootstrap analyses. To regenerate the per-condition false-positive summary from the supplied scores:
+
+```bash
+python -m zipfile -e artifacts/decoder_score_artifact.zip score_artifact
+cd score_artifact/distortion_null
+python summarize_distortion_null.py sd15.csv sd21.csv flux.csv --output reproduced.json
+```
+
+The summary reports the false-positive count, maximum score, and 95% Wilson upper endpoint for each condition at the original cutoff of 0.67. Each panel reuses its base images across conditions.
+
+### Image-level evaluation
 
 - All scripts seed PyTorch and NumPy via `runtime_utils.configure_runtime()`.
 - The cross-scheme SDP slice is fixed: 100 prompts × 5 seeds = 500 images, identical across schemes for paired statistical tests.
